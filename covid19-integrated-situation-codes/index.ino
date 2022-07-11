@@ -3,9 +3,10 @@
 #include <ESP8266WiFi.h>
 
 // Needed variables
-#define REDPIN 12
-#define GREENPIN 13
-#define TEMPVOUT A0
+#define REDPIN 12 // D6
+#define GREENPIN 13 // D7
+#define BUZZER 14 // D5
+#define TEMPVOUT A0 
 
 int lcdColumns = 16;
 int lcdRows = 2;
@@ -24,6 +25,7 @@ void setup() {
     // LEDs
     pinMode(REDPIN, OUTPUT);
     pinMode(GREENPIN, OUTPUT);
+    pinMode(BUZZER, OUTPUT);
 
     // LCD
     lcd.begin(5,4);
@@ -55,11 +57,12 @@ void loop() {
   String dummy_distance = "working cm";
   mData = "device="+dummy_device+"&distance="+(String)celsius;
     
-  sendData(80, "insecure.benax.rw", "/iot/" , mData); 
   
   if(celsius < 27 || celsius > 30 ){
+    sendData(80, "insecure.benax.rw", "/iot/" , mData); 
     // Turn on RED LED
     digitalWrite(REDPIN, HIGH);
+    digitalWrite(BUZZER, HIGH);
     // Turn off GREEN LED
     digitalWrite(GREENPIN, LOW);
 
@@ -71,6 +74,7 @@ void loop() {
   }else{
     // Turn on RED LED
     digitalWrite(REDPIN, LOW);
+    digitalWrite(BUZZER, LOW);
     // Turn off GREEN LED
     digitalWrite(GREENPIN, HIGH);
 
