@@ -3,10 +3,10 @@
 #include <ESP8266WiFi.h>
 
 // Needed variables
-#define REDPIN 12
-#define GREENPIN 13
-#define BUZZER 14
-#define TEMPVOUT A0
+#define REDPIN 12 // D6
+#define GREENPIN 13 // D7
+#define BUZZER 14 // D5
+#define TEMPVOUT A0 
 
 int lcdColumns = 16;
 int lcdRows = 2;
